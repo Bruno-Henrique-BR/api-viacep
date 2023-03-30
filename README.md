@@ -1,4 +1,3 @@
-# api-viacep
 
 # Consulta de endereço por CEP 
 Este é um projeto para consulta de endereço a partir de um CEP. 
