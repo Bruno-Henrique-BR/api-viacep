@@ -64,6 +64,19 @@
 			<version>2.9.2</version>
 		</dependency>
 
+		<dependency>
+			<groupId>io.cucumber</groupId>
+			<artifactId>cucumber-java</artifactId>
+			<version>7.0.0</version>
+			<scope>test</scope>
+		</dependency>
+
+		<dependency>
+			<groupId>io.cucumber</groupId>
+			<artifactId>cucumber-junit</artifactId>
+			<version>7.0.0</version>
+			<scope>test</scope>
+		</dependency>
 		<!-- Dependência do Lombok para simplificar a criação de classes Java -->
 		<dependency>
 			<groupId>org.projectlombok</groupId>

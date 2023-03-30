@@ -28,6 +28,10 @@ Exemplo de requisição:
 ```
 Caso o CEP informado não seja válido, a resposta será um código de erro 400 (Bad Request). 
 Se o CEP informado não for encontrado, a resposta será um código de erro 404 (Not Found).  
+## Testes
+
+Para executar os testes, utilize o comando `mvn test` na raiz do projeto. Isso irá compilar e executar todos os testes existentes na pasta `src/test/java`.
+
 # Como visualizar a documentação da API utilizando o Swagger 
 Para visualizar a documentação da API utilizando o Swagger, basta acessar a URL http://localhost:8080/swagger-ui.html após executar o projeto. 
 Lá você encontrará todos os endpoints disponíveis, bem como os parâmetros necessários para cada requisição. 

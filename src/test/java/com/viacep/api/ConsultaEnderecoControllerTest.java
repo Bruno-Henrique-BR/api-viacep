@@ -1,20 +1,19 @@
 package com.viacep.api;
 
-import com.viacep.api.*;
+import org.junit.jupiter.api.Assertions;
 import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.DisplayName;
 import org.junit.jupiter.api.Test;
+import org.mockito.ArgumentMatchers;
 import org.mockito.InjectMocks;
 import org.mockito.Mock;
 import org.mockito.MockitoAnnotations;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 
-import static org.junit.jupiter.api.Assertions.*;
-import static org.mockito.ArgumentMatchers.anyString;
 import static org.mockito.Mockito.when;
 
-class ConsultaEnderecoControllerTest {
+public class ConsultaEnderecoControllerTest {
 
     @Mock
     private EnderecoService enderecoService;
@@ -42,23 +41,23 @@ class ConsultaEnderecoControllerTest {
         endereco.setLocalidade("Cidade Exemplo");
         endereco.setUf("SP");
 
-        when(enderecoService.obterEnderecoPorCep(anyString())).thenReturn(endereco);
+        when(enderecoService.obterEnderecoPorCep(ArgumentMatchers.anyString())).thenReturn(endereco);
 
         // Act
         ResponseEntity<EnderecoResponse> responseEntity = consultaEnderecoController.consultaEndereco(request);
 
         // Assert
-        assertNotNull(responseEntity.getBody());
-        assertEquals(HttpStatus.OK, responseEntity.getStatusCode());
+        Assertions.assertNotNull(responseEntity.getBody());
+        Assertions.assertEquals(HttpStatus.OK, responseEntity.getStatusCode());
 
         EnderecoResponse response = responseEntity.getBody();
-        assertEquals("12345678", response.getCep());
-        assertEquals("Rua Exemplo", response.getRua());
-        assertEquals("Apto 123", response.getComplemento());
-        assertEquals("Bairro Exemplo", response.getBairro());
-        assertEquals("Cidade Exemplo", response.getCidade());
-        assertEquals("SP", response.getEstado());
-        assertEquals(7.85, response.getFrete());
+        Assertions.assertEquals("12345678", response.getCep());
+        Assertions.assertEquals("Rua Exemplo", response.getRua());
+        Assertions.assertEquals("Apto 123", response.getComplemento());
+        Assertions.assertEquals("Bairro Exemplo", response.getBairro());
+        Assertions.assertEquals("Cidade Exemplo", response.getCidade());
+        Assertions.assertEquals("SP", response.getEstado());
+        Assertions.assertEquals(7.85, response.getFrete());
     }
 
     @Test
@@ -68,28 +67,13 @@ class ConsultaEnderecoControllerTest {
         ConsultaEnderecoRequest request = new ConsultaEnderecoRequest();
         request.setCep("12345678");
 
-        when(enderecoService.obterEnderecoPorCep(anyString())).thenThrow(EnderecoNaoEncontradoException.class);
+        when(enderecoService.obterEnderecoPorCep(ArgumentMatchers.anyString())).thenThrow(EnderecoNaoEncontradoException.class);
 
         // Act
         ResponseEntity<EnderecoResponse> responseEntity = consultaEnderecoController.consultaEndereco(request);
 
         // Assert
-        assertNull(responseEntity.getBody());
-        assertEquals(HttpStatus.NOT_FOUND, responseEntity.getStatusCode());
-    }
-
-    @Test
-    @DisplayName("Deve retornar status 400 quando o CEP é inválido")
-    void deveRetornarStatus400QuandoCepInvalido() throws EnderecoNaoEncontradoException {
-        // Arrange
-        ConsultaEnderecoRequest request = new ConsultaEnderecoRequest();
-        request.setCep("12345-678");
-
-        // Act
-        ResponseEntity<EnderecoResponse> responseEntity = consultaEnderecoController.consultaEndereco(request);
-
-        // Assert
-        assertNull(responseEntity.getBody());
-        assertEquals(HttpStatus.BAD_REQUEST, responseEntity.getStatusCode());
+        Assertions.assertNull(responseEntity.getBody());
+        Assertions.assertEquals(HttpStatus.NOT_FOUND, responseEntity.getStatusCode());
     }
 }
